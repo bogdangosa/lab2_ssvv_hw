@@ -89,19 +89,16 @@ public class GiveBonusECTest {
         GiveBonus.main(new String[]{});
 
         assertEquals(0, getReturnCodeFromOut());
-        // NOTE: This will fail! The professor's code gives them 8000 (double bonus).
         assertEquals(7500, getSalaryFromOut("D"));
     }
 
     @Test
     @DisplayName("TC5: Employee dept != max sale dept -> Salary unchanged")
     public void testTC5() throws Exception {
-        // We need 2 employees so that the winning department isn't empty (which would trigger RC=2).
-        // 1 Emp in IT (Winner), 1 Emp in HR (Loser). 2 Sales (IT=100, HR=50). Max sale is IT.
         String inputData =
                 "2\n" +
-                        "Winner\nIT\ndev\n3000\n" +   // This guy prevents RC=2
-                        "E\nHR\ndev\n3000\n" +        // This is the guy we are actually testing
+                        "Winner\nIT\ndev\n3000\n" +
+                        "E\nHR\ndev\n3000\n" +
                         "2\n" +
                         "IT\n100\n" +
                         "HR\n50\n";
@@ -144,8 +141,6 @@ public class GiveBonusECTest {
     @Test
     @DisplayName("TC9: numEmp = -1 -> Should throw Error")
     public void testTC9() {
-        // We use assertThrows because BBT dictates negative sizes should throw an exception.
-        // NOTE: This test will fail because the program just returns RC 2 instead of throwing an error.
         assertThrows(Exception.class, () -> {
             createInTxt("-1\n1\nIT\n100\n");
             GiveBonus.main(new String[]{});
@@ -155,7 +150,6 @@ public class GiveBonusECTest {
     @Test
     @DisplayName("TC10: Salary = -500 -> Should throw Error")
     public void testTC10() {
-        // NOTE: This test will fail because the program silently processes the negative salary.
         assertThrows(Exception.class, () -> {
             createInTxt("1\nA\nIT\ndev\n-500\n1\nIT\n100\n");
             GiveBonus.main(new String[]{});

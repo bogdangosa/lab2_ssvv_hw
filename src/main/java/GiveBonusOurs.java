@@ -74,7 +74,6 @@ public class GiveBonusOurs {
         }
     }
 
-    // --- YOUR CORRECTED LOGIC ---
     private static int acordaBonus(int numEmp, Angajat[] employees, int numSales, Vanzare[] sales) {
         if (numEmp < 0 || numSales < 0) {
             throw new IllegalArgumentException("Array size cannot be negative");
